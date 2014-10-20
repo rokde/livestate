@@ -123,23 +123,26 @@ The window focus sensor toggles when window blurs.
 
 ## Possible HTML Template
 
-<html class="no-js" data-livestate="true">
-<head>
-	<title>livestate</title>
-</head>
-<body>
-
-<!-- Do your stuff... -->
-
-
-<!-- load the livestate and all of its sensors -->
-<script src="js/livestate.js"></script>
-<script src="js/livestate.sensor.js"></script>
-<script src="js/livestate.useragent.sensor.js"></script>
-<script src="js/livestate.userinput.sensor.js"></script>
-<script src="js/livestate.viewport.sensor.js"></script>
-<script src="js/livestate.windowfocus.sensor.js"></script>
-<script src="js/livestate.dragdrop.sensor.js"></script>
-<script src="js/livestate.connection.sensor.js"></script>
-<script src="js/livestate.cookie.sensor.js"></script>
-</body></html>
+	<html class="no-js" data-livestate="true">
+	<head>
+		<title>livestate</title>
+	</head>
+	<body>
+	
+	<!-- Do your stuff... -->
+	
+	
+	<!-- load the livestate and all of its sensors -->
+	<script src="js/livestate.js"></script>
+	<script src="js/livestate.sensor.js"></script>
+	<script src="js/livestate.useragent.sensor.js"></script>
+	<script src="js/livestate.userinput.sensor.js"></script>
+	<script src="js/livestate.viewport.sensor.js"></script>
+	<script src="js/livestate.windowfocus.sensor.js"></script>
+	<script src="js/livestate.dragdrop.sensor.js"></script>
+	<script src="js/livestate.connection.sensor.js"></script>
+	<script src="js/livestate.cookie.sensor.js"></script>
+	
+	<!-- or just load the minified version -->
+	<script src="dist/livestate.min.js"></script>
+	</body></html>
