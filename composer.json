@@ -1,0 +1,12 @@
+{
+    "name": "rokde/livestate",
+    "description": "A webpage live state observer.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "rokde",
+            "email": "github@mail.robert-kummer.de"
+        }
+    ],
+    "minimum-stability": "dev"
+}

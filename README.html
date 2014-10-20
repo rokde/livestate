@@ -1,0 +1,363 @@
+<html class="no-js" data-livestate="true">
+<head>
+	<title>livestate</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+	<style>
+		html.js .verify-badge.js
+		,html.online .verify-badge.connection-online
+		,html.cookies .verify-badge.cookies
+		,html.mouse .verify-badge.input-mouse
+		,html.keyboard .verify-badge.input-keyboard
+		,html.square .verify-badge.viewport-square
+		,html.landscape .verify-badge.viewport-landscape
+		,html.portrait .verify-badge.viewport-portrait
+		,html.focus .verify-badge.window-focus
+		{ color: #008000; display: inline-block; }
+
+		html.no-js .verify-badge.no-js
+		,html.offline .verify-badge.connection-offline
+		,html.no-cookies .verify-badge.no-cookies
+		,html.blur .verify-badge.window-blur
+		{ color: #ff0000; display: inline-block; }
+
+		html.js .verify-badge.no-js
+		,html.no-js .verify-badge.js
+		,html.online .verify-badge.connection-offline
+		,html.offline .verify-badge.connection-online
+		,html.cookies .verify-badge.no-cookies
+		,html.no-cookies .verify-badge.cookies
+		,html.mouse .verify-badge.input-keyboard
+		,html.keyboard .verify-badge.input-mouse
+		,html.square .verify-badge.viewport-landscape
+		,html.square .verify-badge.viewport-portrait
+		,html.landscape .verify-badge.viewport-square
+		,html.landscape .verify-badge.viewport-portrait
+		,html.portrait .verify-badge.viewport-square
+		,html.portrait .verify-badge.viewport-landscape
+		,html.blur .verify-badge.window-focus
+		,html.focus .verify-badge.window-blur
+		{ color: #ff0000; display: none; }
+	</style>
+</head>
+<body>
+
+<div class="container">
+	<div class="page-header">
+		<h1>livestate</h1>
+		<p class="lead">a live state observer</p>
+		<div class="row">
+			<div class="col-md-2">
+				<div class="well well-sm">
+					Connection
+					<div class="pull-right"><span class="verify-badge connection-online">Online</span><span class="verify-badge connection-offline">Offline</span></div>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="well well-sm">
+					Cookies
+					<div class="pull-right"><span class="verify-badge cookies">Yes</span><span class="verify-badge no-cookies">No</span></div>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="well well-sm">
+					Focus
+					<div class="pull-right"><span class="verify-badge window-focus">Focus</span><span class="verify-badge window-blur">Blur</span></div>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="well well-sm">
+					Javascript
+					<div class="pull-right"><span class="verify-badge js">Yes</span><span class="verify-badge no-js">No</span></div>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="well well-sm">
+					UserInput
+					<div class="pull-right"><span class="verify-badge input-keyboard">Keyboard</span><span class="verify-badge input-mouse">Mouse</span></div>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="well well-sm">
+					Viewport
+					<div class="pull-right"><span class="verify-badge viewport-portrait">Portrait</span><span class="verify-badge viewport-landscape">Landscape</span><span class="verify-badge viewport-square">Square</span></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<h2>Available Sensors</h2>
+	<p>You get a bunch of already built sensors. They all try to set css classes to represent their current state. By
+		default they use the <code>&lt;html&gt;</code> tag, but can be set to every single tag you want.</p>
+	<p>Some of the sensors can also be more explicit. They use the <code>data-</code> attribute on the tag. To activate
+		this behaviour just add the <code>data-livestate="true"</code> attribute to your tag.</p>
+	<p>By default your html template starts like this <code>&lt;html class="no-js" data-livestate="true"&gt;</code>. And
+		livestate does the rest.</p>
+	<p>This can be your dom after sensor execution:
+	<div class="row">
+		<pre class="col-md-6">&lt;html
+class="js safari mouse landscape focus online cookies"
+data-livestate="true"
+data-useragent="Safari" data-useragent.version="537.36"
+data-userinput="mouse"
+data-viewport="landscape"
+data-windowfocus="focus"
+data-connection="online"
+data-cookies="true"&gt;</pre>
+		<pre class="col-md-6">&nbsp;
+&lt;- CSS classes set by the sensors
+&lt;- Activate the data attribute generation
+&lt;- UserAgentSensor
+&lt;- UserInputSensor
+&lt;- ViewportSensor
+&lt;- WindowFocusSensor
+&lt;- ConnectionSensor
+&lt;- CookieSensor</pre>
+	</div>
+
+	<h3>JavascriptSensor</h3>
+	<p>Built-in sensor for checking javascript availability.</p>
+	<table class="table table-hover">
+		<thead>
+		<tr>
+			<th>Represented State</th>
+			<th>CSS Classes</th>
+			<th>Data Attribute</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>No javascript available</th>
+			<td><kbd>no-js</kbd></td>
+			<td>&mdash;</td>
+		</tr>
+		<tr>
+			<td>Javascript available</th>
+			<td><kbd>js</kbd></td>
+			<td>&mdash;</td>
+		</tr>
+		</tbody>
+	</table>
+
+
+	<h3>ConnectionSensor</h3>
+	<p>The connection sensor observes the internet connection.</p>
+	<table class="table table-hover">
+		<thead>
+		<tr>
+			<th>Represented State</th>
+			<th>CSS Classes</th>
+			<th>Data Attribute</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>Offline</th>
+			<td><kbd>offline</kbd></td>
+			<td><kbd>data-connection="offline"</kbd></td>
+		</tr>
+		<tr>
+			<td>Online</th>
+			<td><kbd>online</kbd></td>
+			<td><kbd>data-connection="online"</kbd></td>
+		</tr>
+		</tbody>
+	</table>
+
+
+	<h3>CookieSensor</h3>
+	<p>The cookie sensor observes the cookie availability.</p>
+	<table class="table table-hover">
+		<thead>
+		<tr>
+			<th>Represented State</th>
+			<th>CSS Classes</th>
+			<th>Data Attribute</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>Cookies available</th>
+			<td><kbd>cookies</kbd></td>
+			<td>&mdash;</td>
+		</tr>
+		<tr>
+			<td>No cookies available</th>
+			<td><kbd>no-cookies</kbd></td>
+			<td>&mdash;</td>
+		</tr>
+		</tbody>
+	</table>
+
+
+	<h3>Drag 'n Drop Sensor</h3>
+	<p>The dnd sensor monitors all drag and drop operations.</p>
+	<table class="table table-hover">
+		<thead>
+		<tr>
+			<th>Represented State</th>
+			<th>CSS Classes</th>
+			<th>Data Attribute</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>Dragging</th>
+			<td><kbd>dragging</kbd></td>
+			<td>&mdash;</td>
+		</tr>
+		<tr>
+			<td>Dropping</th>
+			<td><kbd>dropping</kbd></td>
+			<td>&mdash;</td>
+		</tr>
+		</tbody>
+	</table>
+
+
+	<h3>UserAgentSensor</h3>
+	<p>The user agent sensor determines the current useragent name and version. Interesting for mobile webapps to
+		control behaviour and visibility of elements by the used browser control.</p>
+	<table class="table table-hover">
+		<thead>
+		<tr>
+			<th>Represented State</th>
+			<th>CSS Classes</th>
+			<th>Data Attribute</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<th>User agent</th>
+			<td>safari</td>
+			<td><kbd>data-useragent="Safari"</kbd></td>
+		</tr>
+		<tr>
+			<th>User agent version</th>
+			<td>&mdash;</td>
+			<td><kbd>data-useragent.version="537.36"</kbd></td>
+		</tr>
+		</tbody>
+	</table>
+
+
+	<h3>UserInputSensor</h3>
+	<p>The user input sensor toggles the user input when user switches between mouse and keyboard.</p>
+	<table class="table table-hover">
+		<thead>
+		<tr>
+			<th>Represented State</th>
+			<th>CSS Classes</th>
+			<th>Data Attribute</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>Mouse</th>
+			<td><kbd>mouse</kbd></td>
+			<td><kbd>data-userinput="mouse"</kbd></td>
+		</tr>
+		<tr>
+			<td>Keyboard</th>
+			<td><kbd>keyboard</kbd></td>
+			<td><kbd>data-userinput="keyboard"</kbd></td>
+		</tr>
+		</tbody>
+	</table>
+
+
+	<h3>ViewportSensor</h3>
+	<p>The viewport sensor represents the current view port dimensions.</p>
+	<table class="table table-hover">
+		<thead>
+		<tr>
+			<th>Represented State</th>
+			<th>CSS Classes</th>
+			<th>Data Attribute</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>Square</th>
+			<td><kbd>square</kbd></td>
+			<td><kbd>data-viewport="square"</kbd></td>
+		</tr>
+		<tr>
+			<td>Landscape</th>
+			<td><kbd>landscape</kbd></td>
+			<td><kbd>data-viewport="landscape"</kbd></td>
+		</tr>
+		<tr>
+			<td>Portrait</th>
+			<td><kbd>protrait</kbd></td>
+			<td><kbd>data-viewport="protrait"</kbd></td>
+		</tr>
+		</tbody>
+	</table>
+
+
+	<h3>WindowFocusSensor</h3>
+	<p>The window focus sensor toggles when window blurs.</p>
+	<table class="table table-hover">
+		<thead>
+		<tr>
+			<th>Represented State</th>
+			<th>CSS Classes</th>
+			<th>Data Attribute</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>Focus win </th>
+			<td><kbd>focus</kbd></td>
+			<td><kbd>data-windowfocus="focus"</kbd></td>
+		</tr>
+		<tr>
+			<td>Window focus list</th>
+			<td><kbd>blur</kbd></td>
+			<td><kbd>data-viewport="blur"</kbd></td>
+		</tr>
+		</tbody>
+	</table>
+
+
+	<h2>Possible HTML Template</h2>
+	<pre><code>&lt;html class="no-js" data-livestate="true"&gt;
+&lt;head&gt;
+	&lt;title&gt;livestate&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;!-- Do your stuff... --&gt;
+
+
+&lt;!-- load the livestate and all of its sensors --&gt;
+&lt;script src="js/livestate.js"&gt;&lt;/script&gt;
+&lt;script src="js/livestate.sensor.js"&gt;&lt;/script&gt;
+&lt;script src="js/livestate.useragent.sensor.js"&gt;&lt;/script&gt;
+&lt;script src="js/livestate.userinput.sensor.js"&gt;&lt;/script&gt;
+&lt;script src="js/livestate.viewport.sensor.js"&gt;&lt;/script&gt;
+&lt;script src="js/livestate.windowfocus.sensor.js"&gt;&lt;/script&gt;
+&lt;script src="js/livestate.dragdrop.sensor.js"&gt;&lt;/script&gt;
+&lt;script src="js/livestate.connection.sensor.js"&gt;&lt;/script&gt;
+&lt;script src="js/livestate.cookie.sensor.js"&gt;&lt;/script&gt;
+&lt;/body&gt;&lt;/html&gt;</code></pre>
+
+</div>
+
+<!-- load the livestate and all of its sensors -->
+<script src="src/livestate.js"></script>
+<script src="src/livestate.sensor.js"></script>
+<script src="src/livestate.useragent.sensor.js"></script>
+<script src="src/livestate.userinput.sensor.js"></script>
+<script src="src/livestate.viewport.sensor.js"></script>
+<script src="src/livestate.windowfocus.sensor.js"></script>
+<script src="src/livestate.dragdrop.sensor.js"></script>
+<script src="src/livestate.connection.sensor.js"></script>
+<script src="src/livestate.cookie.sensor.js"></script>
+</body>
+</html>
